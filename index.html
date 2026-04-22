@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">FC</div>
+        <div class="brand-text">
+          <h1>Family Calendar</h1>
+          <p id="todayLabel">Today</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Family</h2>
+          <button class="linkbtn" id="editMembersBtn" title="Edit family names">Edit</button>
+        </div>
+        <ul class="members" id="membersList"></ul>
+        <div class="member-actions">
+          <button class="ghost" id="allOnBtn">Show all</button>
+          <button class="ghost" id="allOffBtn">Hide all</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Upcoming</h2>
+        </div>
+        <ul class="upcoming" id="upcomingList"></ul>
+      </section>
+
+      <footer class="sidebar-footer">
+        <button class="primary big" id="newEventBtn">
+          <span class="plus">+</span> New event
+        </button>
+      </footer>
+    </aside>
+
+    <main class="main">
+      <header class="toolbar">
+        <div class="nav-group">
+          <button class="icon" id="prevBtn" aria-label="Previous month">&#10094;</button>
+          <button class="today" id="todayBtn">Today</button>
+          <button class="icon" id="nextBtn" aria-label="Next month">&#10095;</button>
+        </div>
+        <h2 class="month-title" id="monthTitle">Month</h2>
+        <div class="spacer"></div>
+      </header>
+
+      <div class="weekdays">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
+        <div>Thu</div><div>Fri</div><div>Sat</div>
+      </div>
+      <div class="grid" id="calendarGrid"></div>
+    </main>
+  </div>
+
+  <!-- Event modal -->
+  <div class="modal-backdrop" id="eventModal" hidden>
+    <div class="modal">
+      <header class="modal-header">
+        <h3 id="modalTitle">New event</h3>
+        <button class="icon close" id="closeModalBtn" aria-label="Close">&times;</button>
+      </header>
+      <form id="eventForm" class="modal-body">
+        <label class="field">
+          <span>Title</span>
+          <input type="text" id="evTitle" placeholder="Soccer practice" required />
+        </label>
+
+        <div class="row two">
+          <label class="field">
+            <span>Date</span>
+            <input type="date" id="evDate" required />
+          </label>
+          <label class="field">
+            <span>Time</span>
+            <input type="time" id="evTime" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Who</span>
+          <div class="who-chips" id="whoChips"></div>
+        </label>
+
+        <label class="field">
+          <span>Location</span>
+          <input type="text" id="evLocation" placeholder="Community Center" />
+        </label>
+
+        <label class="field">
+          <span>Notes</span>
+          <textarea id="evNotes" rows="3" placeholder="Bring water bottle"></textarea>
+        </label>
+
+        <footer class="modal-footer">
+          <button type="button" class="ghost danger" id="deleteEventBtn" hidden>Delete</button>
+          <div class="spacer"></div>
+          <button type="button" class="ghost" id="cancelBtn">Cancel</button>
+          <button type="submit" class="primary">Save</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- Members modal -->
+  <div class="modal-backdrop" id="membersModal" hidden>
+    <div class="modal">
+      <header class="modal-header">
+        <h3>Edit family members</h3>
+        <button class="icon close" id="closeMembersBtn" aria-label="Close">&times;</button>
+      </header>
+      <div class="modal-body">
+        <div id="membersEdit" class="members-edit"></div>
+        <footer class="modal-footer">
+          <div class="spacer"></div>
+          <button type="button" class="primary" id="saveMembersBtn">Done</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day peek popover -->
+  <div class="daypeek" id="dayPeek" hidden>
+    <header>
+      <h3 id="peekDate"></h3>
+      <button class="icon close" id="closePeekBtn" aria-label="Close">&times;</button>
+    </header>
+    <ul id="peekList"></ul>
+    <button class="primary" id="peekAddBtn">+ Add event</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
