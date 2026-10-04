@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intake Tracker</title>
+<meta name="theme-color" content="#0b1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Intake">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <header>
+    <button id="prev" aria-label="Previous day">‹</button>
+    <h1 id="dateLabel">Today</h1>
+    <button id="next" aria-label="Next day">›</button>
+    <button id="openSettings" aria-label="Settings">⚙︎</button>
+  </header>
+
+  <section class="cards">
+    <div class="card" data-kind="water"><div class="label">💧 Water</div><div class="val" id="waterVal"></div><div class="bar"><i id="waterBar"></i></div></div>
+    <div class="card" data-kind="cal"><div class="label">🔥 Calories</div><div class="val" id="calVal"></div><div class="bar"><i id="calBar"></i></div></div>
+    <div class="card" data-kind="pro"><div class="label">🥩 Protein</div><div class="val" id="proVal"></div><div class="bar"><i id="proBar"></i></div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Add water</h2>
+    <div class="quick" id="waterQuick"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Add food</h2>
+    <form id="foodForm">
+      <input id="foodName" placeholder="What did you eat? (optional)" autocomplete="off">
+      <div class="row">
+        <input id="foodCal" type="number" inputmode="numeric" min="0" placeholder="Calories">
+        <input id="foodPro" type="number" inputmode="decimal" min="0" placeholder="Protein (g)">
+      </div>
+      <button class="primary" type="submit">Add</button>
+    </form>
+    <div class="chips" id="recents"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Log</h2>
+    <ul id="log"></ul>
+    <p class="empty" id="empty">Nothing logged yet.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Last 7 days</h2>
+    <div id="history"></div>
+  </section>
+</main>
+
+<dialog id="settings">
+  <form method="dialog" id="settingsForm">
+    <h2>Settings</h2>
+    <label>Units
+      <select id="units"><option value="oz">Ounces (oz)</option><option value="ml">Milliliters (ml)</option></select>
+    </label>
+    <label>Daily water goal (<span class="u">oz</span>)<input id="goalWater" type="number" inputmode="numeric" min="1"></label>
+    <label>Daily calorie goal<input id="goalCal" type="number" inputmode="numeric" min="1"></label>
+    <label>Daily protein goal (g)<input id="goalPro" type="number" inputmode="numeric" min="1"></label>
+
+    <h3>Water reminders</h3>
+    <label class="inline"><input type="checkbox" id="remindOn"> Remind me to drink water</label>
+    <div class="row">
+      <label>From<input id="remStart" type="time"></label>
+      <label>Until<input id="remEnd" type="time"></label>
+    </div>
+    <label>Every
+      <select id="remEvery">
+        <option value="30">30 minutes</option><option value="45">45 minutes</option>
+        <option value="60">1 hour</option><option value="90">1.5 hours</option>
+        <option value="120">2 hours</option><option value="180">3 hours</option>
+      </select>
+    </label>
+    <p class="hint" id="notifHint"></p>
+    <div class="row">
+      <button type="button" id="testNotif">Send test</button>
+      <button class="primary" value="save" id="saveSettings">Save</button>
+    </div>
+    <button value="cancel" class="link">Close</button>
+  </form>
+</dialog>
+<div id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
